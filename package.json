@@ -1,0 +1,65 @@
+{
+  "name": "dalmatian-sql-formatter",
+  "displayName": "dalmatian-sql-formatter",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:sql",
+    "onLanguage:snowflake-sql"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "sql",
+        "extensions": [
+          ".sql"
+        ],
+        "aliases": [
+          "SQL",
+          "sql"
+        ],
+        "mimetypes": [
+          "text/x-sql"
+        ]
+      }
+    ],
+    "keybindings": [
+      {
+        "mac": "cmd+l",
+        "command": "dalmatian-sql-formatter.format-selection",
+        "when": "editorTextFocus && (editorLangId == sql || editorLangId == snowflake-sql)"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "grammar": "nearleyc src/sql-formatter/parser/grammar.ne -o src/sql-formatter/parser/grammar.ts",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/nearley": "^2.11.5",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.78.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "nearley": "^2.20.1"
+  }
+}
